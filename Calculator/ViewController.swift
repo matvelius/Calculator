@@ -20,8 +20,8 @@ class Calculation {
 
 class ViewController: UIViewController {
     
-    var num1:String = ""
-    var num2:String = ""
+    var num1: String = ""
+    var num2: String = ""
     var newCalculation = Calculation()
     
     // text view
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         if newCalculation.number1 == nil {
             // add new digit to num1
             num1.append(Character(sender.title(for: .normal)!))
-            print(num1)
+//            print(num1)
             // add contents of num1 to text view
             resultView.text.append(Character(sender.title(for: .normal)!))
         } else {
@@ -49,17 +49,27 @@ class ViewController: UIViewController {
     
     // operation buttons
     @IBAction func opButton(_ sender: UIButton) {
-        // user selects operation
+        // user selects operation and it's assigned to a variable
+        let currentOperation = sender.title(for: .normal)
+        print("newCalculation.operation is currently \(newCalculation.operation)")
+        // if no operation was previous selected
         if newCalculation.operation == nil {
             // set current Calculation's number1 to num1
+            print("num1 is currently \(num1)")
             newCalculation.number1 = Double(num1)
-            newCalculation.operation = sender.title(for: .normal)
+            print("setting number1 to \(newCalculation.number1)!")
+            // set current operation to operation chosen by the user
+            newCalculation.operation = currentOperation
+            print("newCalculation.operation is now \(newCalculation.operation)")
+//            print(newCalculation.operation)
             resultView.text.append(newCalculation.operation!)
     //        print(newCalculation.number1!)
-        } else if sender.title(for: .normal) == "=" {
+        } else if currentOperation == "=" {
             // set current Calculation's number2 to num2
             newCalculation.number2 = Double(num2)
-            print(newCalculation.operation!)
+//            print(newCalculation.operation!)
+            print("newCalculation.number1 is \(newCalculation.number1)")
+            print("newCalculation.number2 is \(newCalculation.number2)")
             switch newCalculation.operation! {
             case "+":
                 addition()
@@ -69,14 +79,13 @@ class ViewController: UIViewController {
                 multiplication()
             case "÷":
                 division()
-            case "Clear":
-                clear()
             default:
                 break
-            
             }
             resultView.text.append("=")
             resultView.text.append(String(newCalculation.result!))
+        } else if currentOperation == "Clear" {
+            clear()
         }
     }
     
@@ -103,20 +112,17 @@ class ViewController: UIViewController {
     }
     func division() {
         newCalculation.result = newCalculation.number1! / newCalculation.number2!
-        print(newCalculation.result)
+//        print(newCalculation.result)
     }
     func clear() {
-        newCalculation.result = 0
-        newCalculation.number1 = 0
-        newCalculation.number2 = 0
-        newCalculation.operation = ""
+        newCalculation.result = nil
+        newCalculation.number1 = nil
+        newCalculation.number2 = nil
+        newCalculation.operation = nil
         num1 = ""
         num2 = ""
         resultView.text = ""
-        print(newCalculation)
-        print(num1)
-        print(num2)
-        print(resultView.text)
+        print("cleared! newCalculation.operation is now \(newCalculation.operation)")
     }
     
     // comment
