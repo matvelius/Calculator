@@ -33,13 +33,14 @@ class ViewController: UIViewController {
         if newCalculation.number1 == nil {
             // add new digit to num1
             num1.append(Character(sender.title(for: .normal)!))
+            print(num1)
             // add contents of num1 to text view
-            resultView.text.append(num1)
+            resultView.text.append(Character(sender.title(for: .normal)!))
         } else {
             // add new digit to num2
             num2.append(Character(sender.title(for: .normal)!))
             // add contents of num2 to text view
-            resultView.text.append(num2)
+            resultView.text.append(Character(sender.title(for: .normal)!))
         }
         
         
@@ -58,7 +59,22 @@ class ViewController: UIViewController {
         } else if sender.title(for: .normal) == "=" {
             // set current Calculation's number2 to num2
             newCalculation.number2 = Double(num2)
-            addition()
+            print(newCalculation.operation!)
+            switch newCalculation.operation! {
+            case "+":
+                addition()
+            case "-":
+                subtraction()
+            case "x":
+                multiplication()
+            case "÷":
+                division()
+            case "Clear":
+                clear()
+            default:
+                break
+            
+            }
             resultView.text.append("=")
             resultView.text.append(String(newCalculation.result!))
         }
@@ -78,6 +94,29 @@ class ViewController: UIViewController {
     
     func addition() {
         newCalculation.result = newCalculation.number1! + newCalculation.number2!
+    }
+    func subtraction() {
+        newCalculation.result = newCalculation.number1! - newCalculation.number2!
+    }
+    func multiplication() {
+        newCalculation.result = newCalculation.number1! * newCalculation.number2!
+    }
+    func division() {
+        newCalculation.result = newCalculation.number1! / newCalculation.number2!
+        print(newCalculation.result)
+    }
+    func clear() {
+        newCalculation.result = 0
+        newCalculation.number1 = 0
+        newCalculation.number2 = 0
+        newCalculation.operation = ""
+        num1 = ""
+        num2 = ""
+        resultView.text = ""
+        print(newCalculation)
+        print(num1)
+        print(num2)
+        print(resultView.text)
     }
     
     // comment
