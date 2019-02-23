@@ -9,6 +9,7 @@ class ViewController: UIViewController {
     // comment
     // branch small change
     // another branch
+    // BRANCH MERGE
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
