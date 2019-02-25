@@ -53,18 +53,7 @@ class ViewController: UIViewController {
         let currentOperation = sender.title(for: .normal)
         print("newCalculation.operation is currently \(newCalculation.operation)")
         // if no operation was previous selected
-        if newCalculation.operation == nil {
-            // set current Calculation's number1 to num1
-            print("num1 is currently \(num1)")
-            newCalculation.number1 = Double(num1)
-            print("setting number1 to \(newCalculation.number1)!")
-            // set current operation to operation chosen by the user
-            newCalculation.operation = currentOperation
-            print("newCalculation.operation is now \(newCalculation.operation)")
-//            print(newCalculation.operation)
-            resultView.text.append(newCalculation.operation!)
-    //        print(newCalculation.number1!)
-        } else if currentOperation == "=" {
+        if currentOperation == "=" {
             // set current Calculation's number2 to num2
             newCalculation.number2 = Double(num2)
 //            print(newCalculation.operation!)
@@ -84,8 +73,19 @@ class ViewController: UIViewController {
             }
             resultView.text.append("=")
             resultView.text.append(String(newCalculation.result!))
-        } else if currentOperation == "Clear" {
+        } else if currentOperation == "C" {
             clear()
+        } else if newCalculation.operation == nil {
+            // set current Calculation's number1 to num1
+            print("num1 is currently \(num1)")
+            newCalculation.number1 = Double(num1)
+            print("setting number1 to \(newCalculation.number1)!")
+            // set current operation to operation chosen by the user
+            newCalculation.operation = currentOperation
+            print("newCalculation.operation is now \(newCalculation.operation)")
+            //            print(newCalculation.operation)
+            resultView.text.append(newCalculation.operation!)
+            //        print(newCalculation.number1!)
         }
     }
     
